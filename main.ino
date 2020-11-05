@@ -30,8 +30,6 @@ bool checkLights() {
 }
 
 void getData() {
-	// int64_t sensorVal = analogRead(0);
-	
 	float LIGHT_VOUT = float(analogRead(0)) * (5/float(1023));
 	LIGHT = 500/(((9620 * (5-LIGHT_VOUT))/LIGHT_VOUT)/1000);
 
@@ -47,7 +45,6 @@ void setLightOff() {
 		irsend.sendNEC(0x00FF02FD, 32);
 		delay(100);
 		getData();
-		
 	}
 }
 
@@ -56,7 +53,6 @@ void setLightOn() {
 		irsend.sendNEC(0x00FF02FD, 32);
 		delay(100);
 		getData();
-		
 	}
 }
 
