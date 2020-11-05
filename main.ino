@@ -77,13 +77,6 @@ void goToSleep() {
 	}
 }
 
-void setDefaultProfile() {
-	for(int i = 0; i<3 ; i++) {
-		irsend.sendNEC(0x00FF708F, 32);
-		delay(50);
-	}
-}
-
 void goodMorning() {
 	for(int i = 0; i<3 ; i++) {
 		irsend.sendNEC(0x00FF18E7, 32);
@@ -92,12 +85,30 @@ void goodMorning() {
 	delay(4000);
 }
 
+void setDefaultProfile() {
+	for(int i = 0; i<3 ; i++) {
+		irsend.sendNEC(0x00FF708F, 32);
+		delay(50);
+	}
+}
+
 void setBlue() {
 	for(int i = 0; i<3 ; i++) {
 		irsend.sendNEC(0x00FFA25D, 32);
 		delay(50);
 	}
 	delay(2000);
+}
+
+void setMaxRed() {
+	for(int i = 0; i<3; i++) {
+		irsend.sendNEC(0x00FF1AE5, 32);
+		delay(15);
+	}
+	for(int i = 0; i<9; i++) {
+		irsend.sendNEC(0x00FF3AC5, 32);
+		delay(10);
+	}
 }
 
 void loop() { 
@@ -114,6 +125,7 @@ void loop() {
 		}
 		else if (checkPcLight() & !checkLights() & !checkAmbientalLight()) {
 			setLightOn();
+			setMaxRed();
 			delay(50);
 			setDefaultProfile();
 		}
